@@ -9,24 +9,28 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
     />
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='assets/styles.css') }}" rel="stylesheet" />
   </head>
-  <body>
+  <body class="background">
     <div class="container">
       <!-- Add Jumbotron to Header -->
-      <div class="jumbotron text-center">
-        <h1>Mission to Mars</h1>
+      <div class="jumbotron text-center primary">
+<!-- New Styling: make sure title is always uppercase -->
+        <h1 class="text-uppercase">Mission to Mars</h1>
+<!-- New Styling: Restyle button base color and active states -->
         <!-- Add a button to activate scraping script -->
-        <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+        <p><a class="btn btn-primary btn-lg secondary active" href="/scrape" role="button">Scrape New Data</a></p>
       </div>
 
       <!-- Add section for Mars News -->
       <div class="row" id="mars-news">
         <div class="col-md-12">
           <div class="media">
-            <div class="media-body">
+            <div class="media-body text-primary">
               <h2>Latest Mars News</h2>
-              <h4 class="media-heading">{{ mars.news_title }}</h4>
-              <p>{{ mars.news_paragraph }}</p>
+              <h4 class="media-heading col-md-6">{{ mars.news_title }}</h4>
+              <p class="col-md-6 tab">{{ mars.news_paragraph }}</p>
             </div>
           </div>
         </div>
@@ -34,7 +38,7 @@
 
       <!-- Section for Featured Image and Facts table -->
       <div class="row" id="mars-featured-image">
-        <div class="col-md-8">
+        <div class="col-md-8 text-primary">
           <h2>Featured Mars Image</h2>
 
           <!-- if images is False/None/non-existent, then default to error message -->
@@ -47,7 +51,7 @@
 
         <div class="col-md-4">
           <!-- Mars Facts -->
-          <div class="row" id="mars-facts">
+          <div class="row secondary text-center" id="mars-facts">
             <h4>Mars Facts</h4>
             {{ mars.facts | safe }}
           </div>
@@ -55,17 +59,19 @@
       </div>
 
       <!-- Section for Mars Hemispheres -->
-      <div class="row" id="mars-hemispheres">
+      <div class="row primary" id="mars-hemispheres">
         <div class="page-header">
           <h2 class="text-center">Mars Hemispheres</h2>
         </div>
 
         {% for hemisphere in mars.hemispheres %}
-        <div class="col-md-6">
-          <div class="thumbnail">
-            <img src="{{hemisphere.img_url | default('static/images/error.png', true)}}" alt="...">
+<!-- New Styling: allow 1 col for phone, 2 for tablet and larger -->
+        <div class="col-xs-12 col-sm-6">
+          <div class="thumbnail secondary">
+            <img src="{{hemisphere.img_url | default('static/images/error.png', true)}}"
+            alt="..." class="img-circle">
             <div class="caption">
-              <h3>{{hemisphere.title}}</h3>
+              <h3 class="text-primary">{{hemisphere.title}}</h3>
             </div>
           </div>
         </div>
