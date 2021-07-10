@@ -13,11 +13,11 @@ def scrape_all():
 
     # Run all scraping functions and store results in dictionary
     data = {
-        "news_title": news_title,
-        "news_paragraph": news_paragraph,
-        "featured_image": featured_image(browser),
-        "facts": mars_facts(),
-        "last_modified": dt.datetime.now(),
+        'news_title': news_title,
+        'news_paragraph': news_paragraph,
+        'featured_image': featured_image(browser),
+        'facts': mars_facts(),
+        'last_modified': dt.datetime.now(),
         'hemispheres': mars_hemispheres(browser)
     }
 
@@ -127,7 +127,7 @@ def mars_hemispheres(browser):
         hemi_title = hemi_soup.find('h2').text
         
         # get the image link (seek an anchor link labeled Sample)
-        hemi_url = hemi_soup.find('a', string="Sample").get('href')
+        hemi_url = hemi_soup.find('a', string='Sample').get('href')
         hemisphere_image_urls.append({
             'img_url': f"{url}{hemi_url}",
             'title': hemi_title })
@@ -136,6 +136,6 @@ def mars_hemispheres(browser):
     return hemisphere_image_urls
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     # If running as script, print scraped data
     print(scrape_all())
